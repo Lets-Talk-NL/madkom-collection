@@ -3,7 +3,7 @@
   "description": "Entity collection library with strict element typing",
   "type": "library",
   "require": {
-    "php": "~7"
+    "php": ">= 7.4"
   },
   "require-dev": {
     "henrikbjorn/phpspec-code-coverage": "@dev",
