@@ -5,14 +5,16 @@
  * Date: 06.10.16
  * Time: 10:34
  */
+
 namespace Madkom\Collection;
+
 use RuntimeException;
 use UnexpectedValueException;
 
 /**
  * Class ComparableTypedCollection
  * @package madkom\collection\src
- * @author Michał Brzuchalski <m.brzuchalski@madkom.pl>
+ * @author  Michał Brzuchalski <m.brzuchalski@madkom.pl>
  */
 abstract class ComparableDistinctTypedCollection extends CustomTypedCollection
 {
@@ -22,12 +24,12 @@ abstract class ComparableDistinctTypedCollection extends CustomTypedCollection
      * @param $right
      * @return bool
      */
-    abstract public function compareTo($left, $right) : bool;
+    abstract public function compareTo($left, $right): bool;
 
     /**
      * @inheritDoc
      */
-    public function add($element) : bool
+    public function add($element): bool
     {
         if ($this->contains($element)) {
             throw new RuntimeException("Given element already exists in collection");
@@ -40,7 +42,7 @@ abstract class ComparableDistinctTypedCollection extends CustomTypedCollection
     /**
      * @inheritDoc
      */
-    public function contains($element) : bool
+    public function contains($element): bool
     {
         if (!$this->isElementValid($element)) {
             throw new UnexpectedValueException(

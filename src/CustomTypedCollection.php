@@ -5,6 +5,7 @@
  * Date: 16.02.16
  * Time: 12:23
  */
+
 namespace Madkom\Collection;
 
 use InvalidArgumentException;
@@ -13,7 +14,7 @@ use UnexpectedValueException;
 /**
  * Class AbstractTypedCollection
  * @package Madkom\Collection
- * @author Michał Brzuchalski <m.brzuchalski@madkom.pl>
+ * @author  Michał Brzuchalski <m.brzuchalski@madkom.pl>
  */
 abstract class CustomTypedCollection extends Collection
 {
@@ -21,7 +22,7 @@ abstract class CustomTypedCollection extends Collection
      * Retrieves collection type
      * @return string
      */
-    abstract protected function getType() : string;
+    abstract protected function getType(): string;
 
     /**
      * AbstractTypedCollection constructor.
@@ -38,7 +39,7 @@ abstract class CustomTypedCollection extends Collection
     /**
      * @inheritDoc
      */
-    public function add($element) : bool
+    public function add($element): bool
     {
         if (!$this->isElementValid($element)) {
             throw new UnexpectedValueException(
@@ -52,7 +53,7 @@ abstract class CustomTypedCollection extends Collection
     /**
      * @inheritDoc
      */
-    public function remove($element) : bool
+    public function remove($element): bool
     {
         if (!$this->isElementValid($element)) {
             throw new UnexpectedValueException(
@@ -68,7 +69,7 @@ abstract class CustomTypedCollection extends Collection
      * @param $element
      * @return bool
      */
-    protected function isElementValid($element) : bool
+    protected function isElementValid($element): bool
     {
         return is_a($element, $this->getType()) || is_subclass_of($element, $this->getType());
     }

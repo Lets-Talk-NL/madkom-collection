@@ -5,33 +5,32 @@
  * Date: 15.02.16
  * Time: 14:49
  */
+
 namespace Madkom\Collection;
 
 use InvalidArgumentException;
-use RuntimeException;
-use UnexpectedValueException;
 
 /**
  * Class DistinctCollection
  * @package Madkom\Collection
- * @author Michał Brzuchalski <m.brzuchalski@madkom.pl>
+ * @author  Michał Brzuchalski <m.brzuchalski@madkom.pl>
  */
 class DistinctCollection extends CustomDistinctCollection
 {
     /**
      * @var string Collection generic type
      */
-    protected $type;
+    protected string $type;
     /**
      * @var string Generic type distinguish method name
      */
-    private $method;
+    private string $method;
 
     /**
      * UniqueGenericCollection constructor.
      * @param string $type
      * @param string $method
-     * @param array $elements
+     * @param array  $elements
      */
     public function __construct(string $type, string $method, array $elements = [])
     {
@@ -40,7 +39,7 @@ class DistinctCollection extends CustomDistinctCollection
                 "Non-existent distinct method name in class {$type}, given: {$method}"
             );
         }
-        $this->type = $type;
+        $this->type   = $type;
         $this->method = $method;
         parent::__construct($elements);
     }
@@ -48,7 +47,7 @@ class DistinctCollection extends CustomDistinctCollection
     /**
      * @return string
      */
-    protected function getType() : string
+    protected function getType(): string
     {
         return $this->type;
     }
@@ -56,7 +55,7 @@ class DistinctCollection extends CustomDistinctCollection
     /**
      * @inheritDoc
      */
-    protected function getMethod() : string
+    protected function getMethod(): string
     {
         return $this->method;
     }

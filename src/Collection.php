@@ -5,6 +5,7 @@
  * Date: 12.02.16
  * Time: 15:02
  */
+
 namespace Madkom\Collection;
 
 use ArrayIterator;
@@ -16,14 +17,14 @@ use Traversable;
 /**
  * Class Collection
  * @package Madkom\Collection
- * @author Michał Brzuchalski <m.brzuchalski@madkom.pl>
+ * @author  Michał Brzuchalski <m.brzuchalski@madkom.pl>
  */
 class Collection implements Countable, IteratorAggregate, Serializable
 {
     /**
      * @var array
      */
-    protected $elements = [];
+    protected array $elements = [];
 
     /**
      * Collection constructor.
@@ -41,7 +42,7 @@ class Collection implements Countable, IteratorAggregate, Serializable
      * @param $element
      * @return bool
      */
-    public function add($element) : bool
+    public function add($element): bool
     {
         $this->elements[] = $element;
 
@@ -53,7 +54,7 @@ class Collection implements Countable, IteratorAggregate, Serializable
      * @param $element
      * @return bool
      */
-    public function remove($element) : bool
+    public function remove($element): bool
     {
         if (!$this->contains($element)) {
             return false;
@@ -69,7 +70,7 @@ class Collection implements Countable, IteratorAggregate, Serializable
      * @param $element
      * @return bool
      */
-    public function contains($element) : bool
+    public function contains($element): bool
     {
         return in_array($element, $this->elements, true);
     }
@@ -79,7 +80,7 @@ class Collection implements Countable, IteratorAggregate, Serializable
      * @param callable $checker
      * @return bool
      */
-    public function exists(callable $checker)
+    public function exists(callable $checker): bool
     {
         foreach ($this->elements as $element) {
             if ($checker($element)) {
@@ -93,9 +94,9 @@ class Collection implements Countable, IteratorAggregate, Serializable
     /**
      * Iterates through all elements to exam existence by callback
      * @param callable $checker
-     * @return bool
+     * @return static
      */
-    public function filter(callable $checker)
+    public function filter(callable $checker): static
     {
         $result = new static();
         foreach ($this->elements as $element) {
@@ -109,51 +110,61 @@ class Collection implements Countable, IteratorAggregate, Serializable
 
     /**
      * String representation of object
-     * @link http://php.net/manual/en/serializable.serialize.php
+     * @link  http://php.net/manual/en/serializable.serialize.php
      * @return string the string representation of the object or null
      * @since 5.1.0
      */
-    public function serialize()
+    public function serialize(): string
     {
         return serialize($this->elements);
     }
 
+    public function __serialize(): array
+    {
+        return $this->elements;
+    }
+
     /**
      * Constructs the object
-     * @link http://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
-     * The string representation of the object.
-     * </p>
+     * @link  http://php.net/manual/en/serializable.unserialize.php
+     * @param string $data <p>
+     *                     The string representation of the object.
+     *                     </p>
      * @return void
      * @since 5.1.0
      */
-    public function unserialize($serialized)
+    public function unserialize(string $data): void
     {
-        $this->elements = unserialize($serialized);
+        $this->elements = unserialize($data);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->elements = $data;
     }
 
     /**
      * Count elements of an object
-     * @link http://php.net/manual/en/countable.count.php
+     * @link  http://php.net/manual/en/countable.count.php
      * @return int The custom count as an integer.
      * </p>
      * <p>
      * The return protocol is cast to an integer.
      * @since 5.1.0
      */
-    public function count()
+    public function count(): int
     {
         return count($this->elements);
     }
 
     /**
      * Retrieve an external iterator
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
+     * @link  http://php.net/manual/en/iteratoraggregate.getiterator.php
      * @return Traversable An instance of an object implementing <b>Iterator</b> or
      * <b>Traversable</b>
      * @since 5.0.0
      */
-    public function getIterator()
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->elements);
     }

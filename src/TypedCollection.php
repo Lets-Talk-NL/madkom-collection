@@ -5,6 +5,7 @@
  * Date: 15.02.16
  * Time: 14:27
  */
+
 namespace Madkom\Collection;
 
 class TypedCollection extends CustomTypedCollection
@@ -12,12 +13,12 @@ class TypedCollection extends CustomTypedCollection
     /**
      * @var string Collection generic type
      */
-    protected $type;
+    protected string $type;
 
     /**
      * GenericCollection constructor.
      * @param string $type
-     * @param array $elements
+     * @param array  $elements
      */
     public function __construct(string $type, array $elements = [])
     {
@@ -28,7 +29,7 @@ class TypedCollection extends CustomTypedCollection
     /**
      * @return string
      */
-    protected function getType() : string
+    protected function getType(): string
     {
         return $this->type;
     }
