@@ -96,7 +96,7 @@ class Collection implements Countable, IteratorAggregate, Serializable
      * @param callable $checker
      * @return static
      */
-    public function filter(callable $checker): static
+    public function filter(callable $checker): Collection
     {
         $result = new static();
         foreach ($this->elements as $element) {
@@ -133,7 +133,7 @@ class Collection implements Countable, IteratorAggregate, Serializable
      * @return void
      * @since 5.1.0
      */
-    public function unserialize(string $data): void
+    public function unserialize($data): void
     {
         $this->elements = unserialize($data);
     }
